@@ -1,6 +1,5 @@
 'use strict';
 
-///////////////////////////////////////
 // Modal window
 
 const modal = document.querySelector('.modal');
@@ -21,9 +20,6 @@ const closeModal = function () {
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 };
-// old school
-// for (let i = 0; i < btnsOpenModal.length; i++)
-//   btnsOpenModal[i].addEventListener('click', openModal);
 
 // forEach loop
 btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
@@ -45,15 +41,6 @@ btnScrollTo.addEventListener('click', e => {
   // New modern way
   section1.scrollIntoView({ behavior: 'smooth' });
 });
-
-// Old school
-//   // Scrolling to
-//   // window.scrollTo({
-//   //   left: s1coords.left + window.pageXOffset,
-//   //   top: s1coords.top + window.pageYOffset,
-//   //   behavior: 'smooth',
-//   // });
-// });
 
 // creating element
 const message = document.createElement('div'); //creates a DOM element
@@ -96,79 +83,18 @@ h1.addEventListener('mouseenter', alertH1);
 //remove alert after 3 seconds
 setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
-//third way is to use HTML attribute
-//inline in the marckup
-
-// document.querySelector('.nav__link').addEventListener('click', function (e) {
-//   this.style.backgroundColor = '#333';
-//   this.style.color = '#fff';
-//   console.log('LINK', e.target, e.currentTarget);
-//   console.log(e.currentTarget === this);
-
-//   //stop event propagation never reach the parent element
-//   e.stopPropagation();
-// });
-
-// document.querySelector('.nav__links').addEventListener('click', function (e) {
-//   this.style.backgroundColor = '#e3e3e3';
-//   console.log('LINKS');
-//   console.log('CONTAINER', e.target, e.currentTarget);
-// });
-
-// document.querySelector('.nav').addEventListener('click', function (e) {
-//   this.style.backgroundColor = '#fefefe';
-//   console.log('NAV');
-//   console.log('NAV', e.target, e.currentTarget);
-// });
-
-// Implementing page navigation
-// smooth scrolling to each section
-// starting by selecting each navigation link
-// THIS WORKS FINE BUT IT IS NOT EFFICIENT >>>>>>
-// ATTACHING THIS EVENT HANDLER TO EACH NAV LINK IS UNNECESSARY
-// document.querySelectorAll('.nav__link').forEach(function (el) {
-//   el.addEventListener('click', function (e) {
-//     e.preventDefault();
-//     const id = this.getAttribute('href');
-//     //console.log(id);
-//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-//   });
-// });
-
-// BETTER SOLUTION IS THE FOLLOWING
 // EVENT DELIGATION (bubbling) EVENTS BUBBLE UP
 // Looking e.target property
-// we need an event listener to a common paretn element among these links
+// we need an event listener to a common parent element among these links
 // Determine what element orignated the event
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  // console.log(e.target);
   // MATCHING STRATEGY: need to check if target has this nav__link class
   if (e.target.classList.contains('nav__link')) {
-    // console.log('link');
     e.preventDefault();
     const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
-
-// DOM Traversing walking through DOM tree
-// document.querySelector('h1');
-// // direct childern of h1
-// // h1.firstElementChild.style.color = 'red';
-// h1.lastElementChild.style.color = '#fefefe';
-// // going upwards
-// // selecting parents to h1
-// h1.parentElement.style.color = 'orangered';
-// // closest method
-// // only want to find the one that is parent element to h1
-// h1.closest('.header').style.backgroundColor = 'var(--color-primary)';
-// // going sideways
-// h1.previousElementSibling;
-// h1.nextElementSibling;
-// h1.parentElement.children;
-// [...h1.parentElement.children].forEach(function (el) {
-//   if (el !== h1) el.style.transform = 'scale(0.5)';
-// });
 
 // TAB COMPONENT
 // NEXT FEATURE
@@ -184,7 +110,7 @@ const tabsContent = document.querySelectorAll('.operations__content');
 // );
 
 // Using event deligation
-//e.target e being what it was clicked
+// e.target
 tabsContainer.addEventListener('click', e => {
   const clicked = e.target.closest('.operations__tab');
   if (!clicked) return;
@@ -219,7 +145,6 @@ nav.addEventListener('mouseover', e => {
 // STICKY NAVIGATION
 // Adding the sticky class to the nav bar
 // Intersection Observer API
-
 const headerEl = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height; // dynamically calculate the nav height
 const stickyNav = function (entries) {
@@ -289,10 +214,6 @@ const dotContainer = document.querySelector('.dots');
 // create a new variable for current slide
 let curslide = 0;
 const maxSlide = slides.length;
-
-// const slider = document.querySelector('.slider');
-// slider.style.transform = `scale(0.2) translateX(-800px)`;
-// slider.style.overflow = `visible`;
 
 const goToSlide = function (slide) {
   slides.forEach((s, i) => {
